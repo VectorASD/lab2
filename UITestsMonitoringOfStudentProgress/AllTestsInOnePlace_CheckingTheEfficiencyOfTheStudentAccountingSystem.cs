@@ -10,10 +10,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// Фиксим кодировку...
+// Р¤РёРєСЃРёРј РєРѕРґРёСЂРѕРІРєСѓ 2...
 
 namespace UITestsForMonitoringOfStudentProgress {
-    // Как и просили - название длиной в триллион слов ;'-}
+    // РљР°Рє Рё РїСЂРѕСЃРёР»Рё - РЅР°Р·РІР°РЅРёРµ РґР»РёРЅРѕР№ РІ С‚СЂРёР»Р»РёРѕРЅ СЃР»РѕРІ ;'-}
     public class AllTestsInOnePlace_CheckingTheEfficiencyOfTheStudentAccountingSystem {
         private MainWindow mainWindow = AvaloniaApp.GetMainWindow();
         private Button button_AS, button_GS, button_E, button_I;
@@ -108,17 +108,17 @@ namespace UITestsForMonitoringOfStudentProgress {
         [Fact]
         public async void GeneralTest() {
             await Task.Delay(10);
-            Assert.Equal("Есть пустые КС|1,333 1,333 0,333 1,667 1,1667|NaN|--", TextAll());
+            Assert.Equal("Р•СЃС‚СЊ РїСѓСЃС‚С‹Рµ РљРЎ|1,333 1,333 0,333 1,667 1,1667|NaN|--", TextAll());
             Assert.Equal("Yellow|Yellow|Red|Green|Yellow", AllColors());
-            Assert.Equal("А А А|2,0,1,1~В В В|1,2,0,2~И И И|1,2,0,2", SuperLoader());
+            Assert.Equal("Рђ Рђ Рђ|2,0,1,1~Р’ Р’ Р’|1,2,0,2~Р Р Р|1,2,0,2", SuperLoader());
 
             SetCombo(2, 1, 0, 3);
             await Task.Delay(1);
-            Assert.Equal("Есть пустые КС|1,333 1,333 0,333 1,667 1,1667|NaN|--", TextAll());
+            Assert.Equal("Р•СЃС‚СЊ РїСѓСЃС‚С‹Рµ РљРЎ|1,333 1,333 0,333 1,667 1,1667|NaN|--", TextAll());
 
             SetCombo(2, 1, 1, 3);
             await Task.Delay(1);
-            Assert.Equal("Невалидное ФИО|1,333 1,333 0,333 1,667 1,1667|0,75|--", TextAll());
+            Assert.Equal("РќРµРІР°Р»РёРґРЅРѕРµ Р¤РРћ|1,333 1,333 0,333 1,667 1,1667|0,75|--", TextAll());
 
             Write("   fF  FSd     dS  ");
             await Task.Delay(1);
@@ -126,19 +126,19 @@ namespace UITestsForMonitoringOfStudentProgress {
 
             Press_AS();
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,250 1,000 0,250 1,750 1,0625|0,75|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,250 1,000 0,250 1,750 1,0625|0,75|-+", TextAll());
             Assert.Equal("Yellow|Yellow|Red|Green|Yellow", AllColors());
 
-            Write("  пРиЛеПа МиХаИл                    КоНсТантиНОВИЧ");
+            Write("  РїР РёР›РµРџР° РњРёРҐР°РР»                    РљРѕРќСЃРўР°РЅС‚РёРќРћР’РР§");
             SetCombo(3, 3, 3, 3);
             await Task.Delay(1);
-            Assert.Equal("4 | Прилепа Михаил Константинович|1,250 1,000 0,250 1,750 1,0625|2,00|+-", TextAll());
+            Assert.Equal("4 | РџСЂРёР»РµРїР° РњРёС…Р°РёР» РљРѕРЅСЃС‚Р°РЅС‚РёРЅРѕРІРёС‡|1,250 1,000 0,250 1,750 1,0625|2,00|+-", TextAll());
 
             Press_AS();
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,400 1,200 0,600 1,800 1,2500|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,400 1,200 0,600 1,800 1,2500|2,00|-+", TextAll());
             Assert.Equal("Yellow|Yellow|Red|Green|Yellow", AllColors());
-            Assert.Equal("Ff Fsd Ds|1,0,0,2~А А А|2,0,1,1~В В В|1,2,0,2~И И И|1,2,0,2~Прилепа Михаил Константинович|2,2,2,2", SuperLoader());
+            Assert.Equal("Ff Fsd Ds|1,0,0,2~Рђ Рђ Рђ|2,0,1,1~Р’ Р’ Р’|1,2,0,2~Р Р Р|1,2,0,2~РџСЂРёР»РµРїР° РњРёС…Р°РёР» РљРѕРЅСЃС‚Р°РЅС‚РёРЅРѕРІРёС‡|2,2,2,2", SuperLoader());
 
             String path = "../../../../TestStudBase.asd";
             if (File.Exists(path)) File.Delete(path);
@@ -146,51 +146,51 @@ namespace UITestsForMonitoringOfStudentProgress {
             Press_I();
             Assert.True(File.Exists(path));
 
-            Write("А А А");
+            Write("Рђ Рђ Рђ");
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,400 1,200 0,600 1,800 1,2500|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,400 1,200 0,600 1,800 1,2500|2,00|-+", TextAll());
 
             Press_GS();
-            Write("В В В");
+            Write("Р’ Р’ Р’");
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,250 1,500 0,500 2,000 1,3125|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,250 1,500 0,500 2,000 1,3125|2,00|-+", TextAll());
             Assert.Equal("Yellow|Green|Red|Green|Yellow", AllColors());
 
             Press_GS();
-            Write("    и И    й");
+            Write("    Рё Р    Р№");
             await Task.Delay(1);
-            Assert.Equal("2 | И И Й|1,333 1,333 0,667 2,000 1,3333|2,00|+-", TextAll());
+            Assert.Equal("2 | Р Р Р™|1,333 1,333 0,667 2,000 1,3333|2,00|+-", TextAll());
             Assert.Equal("Yellow|Yellow|Red|Green|Yellow", AllColors());
 
-            Write("И     и И     ");
+            Write("Р     Рё Р     ");
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,333 1,333 0,667 2,000 1,3333|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,333 1,333 0,667 2,000 1,3333|2,00|-+", TextAll());
 
             Press_GS();
-            Write("ПРилЕПа МИхаИЛ коНСтаНТиНОвиЧ");
+            Write("РџР РёР»Р•РџР° РњРС…Р°РР› РєРѕРќРЎС‚Р°РќРўРёРќРћРІРёР§");
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,500 1,000 1,000 2,000 1,3750|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,500 1,000 1,000 2,000 1,3750|2,00|-+", TextAll());
             Assert.Equal("Green|Yellow|Yellow|Green|Yellow", AllColors());
-            Assert.Equal("Ff Fsd Ds|1,0,0,2~Прилепа Михаил Константинович|2,2,2,2", SuperLoader());
+            Assert.Equal("Ff Fsd Ds|1,0,0,2~РџСЂРёР»РµРїР° РњРёС…Р°РёР» РљРѕРЅСЃС‚Р°РЅС‚РёРЅРѕРІРёС‡|2,2,2,2", SuperLoader());
 
             Press_GS();
             Write("Ff      fsD      Ds");
             await Task.Delay(1);
-            Assert.Equal("Такое ФИО уже есть|1,000 0,000 0,000 2,000 0,7500|2,00|-+", TextAll());
+            Assert.Equal("РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ|1,000 0,000 0,000 2,000 0,7500|2,00|-+", TextAll());
             Assert.Equal("Yellow|Red|Red|Green|Red", AllColors());
 
             Press_GS();
             Write("LOLOLOLOLOOLOLOOOOOOLOOLOLOLOLOL   OLOLOOOOOOOLOOOLOOLOLOLOLOLOLOLOLOL");
             await Task.Delay(1);
-            Assert.Equal("Невалидное ФИО|NaN NaN NaN NaN NaN|2,00|--", TextAll());
+            Assert.Equal("РќРµРІР°Р»РёРґРЅРѕРµ Р¤РРћ|NaN NaN NaN NaN NaN|2,00|--", TextAll());
             Assert.Equal("Aqua|Aqua|Aqua|Aqua|Aqua", AllColors());
             Assert.Equal("", SuperLoader());
 
             Press_E();
             await Task.Delay(1);
-            Assert.Equal("База удачно загружена|1,400 1,200 0,600 1,800 1,2500|2,00|--", TextAll());
+            Assert.Equal("Р‘Р°Р·Р° СѓРґР°С‡РЅРѕ Р·Р°РіСЂСѓР¶РµРЅР°|1,400 1,200 0,600 1,800 1,2500|2,00|--", TextAll());
             Assert.Equal("Yellow|Yellow|Red|Green|Yellow", AllColors());
-            Assert.Equal("Ff Fsd Ds|1,0,0,2~А А А|2,0,1,1~В В В|1,2,0,2~И И И|1,2,0,2~Прилепа Михаил Константинович|2,2,2,2", SuperLoader());
+            Assert.Equal("Ff Fsd Ds|1,0,0,2~Рђ Рђ Рђ|2,0,1,1~Р’ Р’ Р’|1,2,0,2~Р Р Р|1,2,0,2~РџСЂРёР»РµРїР° РњРёС…Р°РёР» РљРѕРЅСЃС‚Р°РЅС‚РёРЅРѕРІРёС‡|2,2,2,2", SuperLoader());
 
             Write("a a a");
             await Task.Delay(1);
@@ -200,25 +200,25 @@ namespace UITestsForMonitoringOfStudentProgress {
             await Task.Delay(1);
             Assert.Equal("1 | _a A Aa|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
 
-            Write("А_ А А");
+            Write("Рђ_ Рђ Рђ");
             await Task.Delay(1);
-            Assert.Equal("2 | А_ А А|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
+            Assert.Equal("2 | Рђ_ Рђ Рђ|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
 
-            Write("бИ Би бИ");
+            Write("Р±Р Р‘Рё Р±Р");
             await Task.Delay(1);
-            Assert.Equal("2 | Би Би Би|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
+            Assert.Equal("2 | Р‘Рё Р‘Рё Р‘Рё|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
 
-            Write("Гы гЫ ГЫ");
+            Write("Р“С‹ РіР« Р“Р«");
             await Task.Delay(1);
-            Assert.Equal("3 | Гы Гы Гы|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
+            Assert.Equal("3 | Р“С‹ Р“С‹ Р“С‹|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
 
-            Write("Йёо йЁо йёО");
+            Write("Р™С‘Рѕ Р№РЃРѕ Р№С‘Рћ");
             await Task.Delay(1);
-            Assert.Equal("4 | Йёо ЙЁо Йёо|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
+            Assert.Equal("4 | Р™С‘Рѕ Р™РЃРѕ Р™С‘Рѕ|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());
 
-            Write("ЯяЯ яЯя ЯяЯ");
+            Write("РЇСЏРЇ СЏРЇСЏ РЇСЏРЇ");
             await Task.Delay(1);
-            Assert.Equal("5 | Яяя Яяя Яяя|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());            
+            Assert.Equal("5 | РЇСЏСЏ РЇСЏСЏ РЇСЏСЏ|1,400 1,200 0,600 1,800 1,2500|2,00|+-", TextAll());            
         }
     }
 }

@@ -8,7 +8,7 @@ using System.IO.Compression;
 using System.Reactive;
 using System.Text;
 
-// Фиксим кодировку...
+// Р¤РёРєСЃРёРј РєРѕРґРёСЂРѕРІРєСѓ 2...
 
 namespace MonitoringOfStudentProgress.ViewModels {
     public class MainWindowViewModel: ViewModelBase {
@@ -22,7 +22,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
 
 
 
-        private String cb_avg = "NaN", status = "Есть пустые КС", student_name = "";
+        private String cb_avg = "NaN", status = "Р•СЃС‚СЊ РїСѓСЃС‚С‹Рµ РљРЎ", student_name = "";
         private bool active_add = false, active_grind = false;
         private string last_student_name = "";
         public String CbAvg {
@@ -51,7 +51,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
             foreach (int i in cb_data) {
                 if (i == -1) {
                     CbAvg = "NaN";
-                    Status = "Есть пустые КС";
+                    Status = "Р•СЃС‚СЊ РїСѓСЃС‚С‹Рµ РљРЎ";
                     ActiveAdd = false;
                     ActiveGrind = false;
                     return;
@@ -61,14 +61,14 @@ namespace MonitoringOfStudentProgress.ViewModels {
             CbAvg = String.Format("{0:F2}", (float) S / 4);
             String name = NormalizeStr.NormalizeTitleStr(student_name);
             if (name.Split(" ").Length != 3) {
-                Status = "Невалидное ФИО";
+                Status = "РќРµРІР°Р»РёРґРЅРѕРµ Р¤РРћ";
                 ActiveAdd = false;
                 ActiveGrind = false;
                 return;
             }
             int new_pos = FindPosList(name);
             bool repeat_fio = new_pos == -1;
-            Status = repeat_fio ? "Такое ФИО уже есть" : new_pos + " | " + name;
+            Status = repeat_fio ? "РўР°РєРѕРµ Р¤РРћ СѓР¶Рµ РµСЃС‚СЊ" : new_pos + " | " + name;
             ActiveAdd = !repeat_fio;
             ActiveGrind = repeat_fio;
             last_student_name = name;
@@ -77,17 +77,17 @@ namespace MonitoringOfStudentProgress.ViewModels {
 
 
         private readonly List<Student> studentList = new() {
-            new Student("А А А", new int[] {2, 0, 1, 1}),
-            new Student("В В В", new int[] {1, 2, 0, 2}),
-            new Student("И И И", new int[] {1, 2, 0, 2})
+            new Student("Рђ Рђ Рђ", new int[] {2, 0, 1, 1}),
+            new Student("Р’ Р’ Р’", new int[] {1, 2, 0, 2}),
+            new Student("Р Р Р", new int[] {1, 2, 0, 2})
         };
         public Student[] StudentList {
             get => studentList.ToArray();
             set {
                 List<Student> lol = new();
                 this.RaiseAndSetIfChanged(ref lol, studentList);
-                // Заставляю силой обновить список после каждого добавления/удаления студента...
-                // Даже force.UpdProperty("studentList") не помог, только через RaiseAndSetIfChanged :///
+                // Р—Р°СЃС‚Р°РІР»СЏСЋ СЃРёР»РѕР№ РѕР±РЅРѕРІРёС‚СЊ СЃРїРёСЃРѕРє РїРѕСЃР»Рµ РєР°Р¶РґРѕРіРѕ РґРѕР±Р°РІР»РµРЅРёСЏ/СѓРґР°Р»РµРЅРёСЏ СЃС‚СѓРґРµРЅС‚Р°...
+                // Р”Р°Р¶Рµ force.UpdProperty("studentList") РЅРµ РїРѕРјРѕРі, С‚РѕР»СЊРєРѕ С‡РµСЂРµР· RaiseAndSetIfChanged :///
             }
         }
         private void Upd_stud_list() {
@@ -213,7 +213,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
             decompressionStream.Read(result, 0, length);
             return result;
         }
-        String base_path = "../../../../MainStudBase.asd"; // Папка с решением lab2.
+        String base_path = "../../../../MainStudBase.asd"; // РџР°РїРєР° СЃ СЂРµС€РµРЅРёРµРј lab2.
         public void Set_debug_mode() {
             base_path = "../../../../TestStudBase.asd";
         }
@@ -228,11 +228,11 @@ namespace MonitoringOfStudentProgress.ViewModels {
             byte[] encoded = Encoding.UTF8.GetBytes(sb.ToString());
             byte[] compressed = Compress(encoded);
             File.WriteAllBytes(base_path, compressed);
-            Status = "База удачно сохранена";
+            Status = "Р‘Р°Р·Р° СѓРґР°С‡РЅРѕ СЃРѕС…СЂР°РЅРµРЅР°";
         }
         private void FuncImport() {
             if (!File.Exists(base_path)) {
-                Status = "Файл базы не найден";
+                Status = "Р¤Р°Р№Р» Р±Р°Р·С‹ РЅРµ РЅР°Р№РґРµРЅ";
                 return;
             }
             byte[] compressed = File.ReadAllBytes(base_path);
@@ -242,7 +242,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
             studentList.Clear();
             foreach (String pack in data.Split("\n")) studentList.Add(new Student(pack));
             Upd_stud_list();
-            Status = "База удачно загружена";
+            Status = "Р‘Р°Р·Р° СѓРґР°С‡РЅРѕ Р·Р°РіСЂСѓР¶РµРЅР°";
         }
 
 
@@ -265,9 +265,9 @@ namespace MonitoringOfStudentProgress.ViewModels {
             Import = ReactiveCommand.Create<Unit, Unit>(_ => { FuncImport(); return new Unit(); });
         }
         public ReactiveCommand<Unit, Unit> AddStudent { get; }
-        // Хотел назвать метод DestroyBurnCutGrindAnnihilatePulverizeRuinExterminateStudent,
-        // но половина из них применима к технической обработке сырья, а не студентов.
-        // Шутка про длинное название метода, хотя всё это синонимы одного и того же слова Remove с разной степенью масштаба...
+        // РҐРѕС‚РµР» РЅР°Р·РІР°С‚СЊ РјРµС‚РѕРґ DestroyBurnCutGrindAnnihilatePulverizeRuinExterminateStudent,
+        // РЅРѕ РїРѕР»РѕРІРёРЅР° РёР· РЅРёС… РїСЂРёРјРµРЅРёРјР° Рє С‚РµС…РЅРёС‡РµСЃРєРѕР№ РѕР±СЂР°Р±РѕС‚РєРµ СЃС‹СЂСЊСЏ, Р° РЅРµ СЃС‚СѓРґРµРЅС‚РѕРІ.
+        // РЁСѓС‚РєР° РїСЂРѕ РґР»РёРЅРЅРѕРµ РЅР°Р·РІР°РЅРёРµ РјРµС‚РѕРґР°, С…РѕС‚СЏ РІСЃС‘ СЌС‚Рѕ СЃРёРЅРѕРЅРёРјС‹ РѕРґРЅРѕРіРѕ Рё С‚РѕРіРѕ Р¶Рµ СЃР»РѕРІР° Remove СЃ СЂР°Р·РЅРѕР№ СЃС‚РµРїРµРЅСЊСЋ РјР°СЃС€С‚Р°Р±Р°...
         public ReactiveCommand<Unit, Unit> GrindStudent { get; }
         public ReactiveCommand<Unit, Unit> Export { get; }
         public ReactiveCommand<Unit, Unit> Import { get; }
