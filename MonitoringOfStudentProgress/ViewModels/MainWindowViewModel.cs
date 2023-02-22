@@ -116,6 +116,11 @@ namespace MonitoringOfStudentProgress.ViewModels {
         public string GlobAVG { get => glob_avg; set => this.RaiseAndSetIfChanged(ref glob_avg, value); }
         public void GlobalUpdate() {
             int a = 0, b = 0, c = 0, d = 0, L = studentList.Count;
+            if (L == 0) {
+                GlobA = GlobB = GlobC = GlobD = GlobAVG = "NaN";
+                ColorA = ColorB = ColorC = ColorD = ColorAVG = "Aqua";
+                return;
+            }
             foreach (Student student in studentList) {
                 a += student.ScoreA;
                 b += student.ScoreB;

@@ -76,23 +76,23 @@
 
 		<Grid Grid.Row="2" Grid.Column="0" RowDefinitions="*,*">
 			<TextBlock Grid.Row="0" Text="Статус:"/>
-			<TextBlock Grid.Row="1" Text="{Binding Status}"/>
+			<TextBlock Name="status" Grid.Row="1" Text="{Binding Status}"/>
 		</Grid>
 		
 		<Border Grid.Row="2" Grid.Column="1" Background="{Binding ColorA}">
-			<TextBlock Text="{Binding GlobA}"/>
+			<TextBlock Name="glob_a" Text="{Binding GlobA}"/>
 		</Border>
 		<Border Grid.Row="2" Grid.Column="2" Background="{Binding ColorB}">
-			<TextBlock Text="{Binding GlobB}"/>
+			<TextBlock Name="glob_b" Text="{Binding GlobB}"/>
 		</Border>
 		<Border Grid.Row="2" Grid.Column="3" Background="{Binding ColorC}">
-			<TextBlock Text="{Binding GlobC}"/>
+			<TextBlock Name="glob_c" Text="{Binding GlobC}"/>
 		</Border>
 		<Border Grid.Row="2" Grid.Column="4" Background="{Binding ColorD}">
-			<TextBlock Text="{Binding GlobD}"/>
+			<TextBlock Name="glob_d" Text="{Binding GlobD}"/>
 		</Border>
 		<Border Grid.Row="2" Grid.Column="5" Background="{Binding ColorAVG}">
-			<TextBlock Text="{Binding GlobAVG}"/>
+			<TextBlock Name="globAvg" Text="{Binding GlobAVG}"/>
 		</Border>
 		
 		<TextBox Name="studentName" Grid.Row="3" Grid.Column="0" Text="{Binding StudentName}"/>
@@ -102,10 +102,10 @@
 		<ComboBox Name="cb_4" Grid.Row="3" Grid.Column="4" Items=" 012" SelectedIndex="{Binding Cb_4}"/>
 		<TextBlock Name="cbAvg" Grid.Row="3" Grid.Column="5" Text="{Binding CbAvg}"/>
 		
-		<Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Добавить" Command="{Binding AddStudent}" IsEnabled="{Binding ActiveAdd}"/>
-		<Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" Content="Удалить" Command="{Binding GrindStudent}" IsEnabled="{Binding ActiveGrind}"/>
-		
-		<Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Сохранить" Command="{Binding Export}"/>
-		<Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Content="Загрузить" Command="{Binding Import}"/>
+		<Button Name="addStudent" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Добавить" Command="{Binding AddStudent}" IsEnabled="{Binding ActiveAdd}"/>
+		<Button Name="grindStudent" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" Content="Удалить" Command="{Binding GrindStudent}" IsEnabled="{Binding ActiveGrind}"/>
+
+		<Button Name="export" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Сохранить" Command="{Binding Export}"/>
+		<Button Name="import" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Content="Загрузить" Command="{Binding Import}"/>
 	</Grid>
 </Window>
