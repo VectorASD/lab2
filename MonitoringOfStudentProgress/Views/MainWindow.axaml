@@ -1,0 +1,111 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:MonitoringOfStudentProgress.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="700"
+		Width="700" Height="700"
+        x:Class="MonitoringOfStudentProgress.Views.MainWindow"
+        Icon="/Assets/vectorasd-logo.ico"
+        Title="MonitoringOfStudentProgress">
+
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="20"/>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="14"/>
+			<Setter Property="Width" Value="250"/>
+			<Setter Property="Height" Value="50"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="32"/>
+			<Setter Property="CornerRadius" Value="10"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="VerticalAlignment" Value="Center"/>
+			<Setter Property="HorizontalAlignment" Value="Center"/>
+			<Setter Property="FontSize" Value="20"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Margin" Value="0 10"/>
+		</Style>
+		<Style Selector="ListBoxItem">
+			<Setter Property="Padding" Value="0"/>
+		</Style>
+	</Window.Styles>
+
+	<Grid ColumnDefinitions="3*,*,*,*,*,*" RowDefinitions="*,3*,*,*,*,*">
+		<TextBlock Grid.Row="0" Grid.Column="0" Text="ФИО"/>
+		<TextBlock Grid.Row="0" Grid.Column="1" Text="ТВиМС"/>
+		<TextBlock Grid.Row="0" Grid.Column="2" Text="ВПиЧМВ"/>
+		<TextBlock Grid.Row="0" Grid.Column="3" Text="ТРПО"/>
+		<TextBlock Grid.Row="0" Grid.Column="4" Text="ООП"/>
+		<TextBlock Grid.Row="0" Grid.Column="5" Text="Ср. балл"/>
+		
+		<ListBox Items="{Binding StudentList}" Name="studentList" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="3*,*,*,*,*,*">
+						<TextBlock Grid.Column="0" Text="{Binding Name}"/>
+						<Border Grid.Column="1" Background="{Binding ColorA}">
+							<ComboBox Items="012" SelectedIndex="{Binding ScoreA}"/>
+						</Border>
+						<Border Grid.Column="2" Background="{Binding ColorB}">
+							<ComboBox Items="012" SelectedIndex="{Binding ScoreB}"/>
+						</Border>
+						<Border Grid.Column="3" Background="{Binding ColorC}">
+							<ComboBox Items="012" SelectedIndex="{Binding ScoreC}"/>
+						</Border>
+						<Border Grid.Column="4" Background="{Binding ColorD}">
+							<ComboBox Items="012" SelectedIndex="{Binding ScoreD}"/>
+						</Border>
+						<Border Grid.Column="5" Background="{Binding ColorAVG}">
+							<TextBlock Text="{Binding Avg}"/>
+						</Border>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<Grid Grid.Row="2" Grid.Column="0" RowDefinitions="*,*">
+			<TextBlock Grid.Row="0" Text="Статус:"/>
+			<TextBlock Grid.Row="1" Text="{Binding Status}"/>
+		</Grid>
+		
+		<Border Grid.Row="2" Grid.Column="1" Background="{Binding ColorA}">
+			<TextBlock Text="{Binding GlobA}"/>
+		</Border>
+		<Border Grid.Row="2" Grid.Column="2" Background="{Binding ColorB}">
+			<TextBlock Text="{Binding GlobB}"/>
+		</Border>
+		<Border Grid.Row="2" Grid.Column="3" Background="{Binding ColorC}">
+			<TextBlock Text="{Binding GlobC}"/>
+		</Border>
+		<Border Grid.Row="2" Grid.Column="4" Background="{Binding ColorD}">
+			<TextBlock Text="{Binding GlobD}"/>
+		</Border>
+		<Border Grid.Row="2" Grid.Column="5" Background="{Binding ColorAVG}">
+			<TextBlock Text="{Binding GlobAVG}"/>
+		</Border>
+		
+		<TextBox Name="studentName" Grid.Row="3" Grid.Column="0" Text="{Binding StudentName}"/>
+		<ComboBox Name="cb_1" Grid.Row="3" Grid.Column="1" Items=" 012" SelectedIndex="{Binding Cb_1}"/>
+		<ComboBox Name="cb_2" Grid.Row="3" Grid.Column="2" Items=" 012" SelectedIndex="{Binding Cb_2}"/>
+		<ComboBox Name="cb_3" Grid.Row="3" Grid.Column="3" Items=" 012" SelectedIndex="{Binding Cb_3}"/>
+		<ComboBox Name="cb_4" Grid.Row="3" Grid.Column="4" Items=" 012" SelectedIndex="{Binding Cb_4}"/>
+		<TextBlock Name="cbAvg" Grid.Row="3" Grid.Column="5" Text="{Binding CbAvg}"/>
+		
+		<Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Добавить" Command="{Binding AddStudent}" IsEnabled="{Binding ActiveAdd}"/>
+		<Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="4" Content="Удалить" Command="{Binding GrindStudent}" IsEnabled="{Binding ActiveGrind}"/>
+		
+		<Button Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Content="Сохранить" Command="{Binding Export}"/>
+		<Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="4" Content="Загрузить" Command="{Binding Import}"/>
+	</Grid>
+</Window>
