@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// Фиксим кодировку...
+
 namespace UITestsForMonitoringOfStudentProgress {
     // Как и просили - название длиной в триллион слов ;'-}
     public class AllTestsInOnePlace_CheckingTheEfficiencyOfTheStudentAccountingSystem {

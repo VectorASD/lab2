@@ -8,6 +8,8 @@ using System.IO.Compression;
 using System.Reactive;
 using System.Text;
 
+// Фиксим кодировку...
+
 namespace MonitoringOfStudentProgress.ViewModels {
     public class MainWindowViewModel: ViewModelBase {
         // private TextBox studentName;
