@@ -1,12 +1,9 @@
 using MonitoringOfStudentProgress.Models;
-using MonitoringOfStudentProgress.Views;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.IO.Compression;
 using System.Reactive;
-using System.Text;
 
 // Фиксим кодировку 2...
 
@@ -46,6 +43,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
             set => this.RaiseAndSetIfChanged(ref active_grind, value);
         }
 
+
         private void Cb_calc() {
             int S = 0;
             foreach (int i in cb_data) {
@@ -76,23 +74,16 @@ namespace MonitoringOfStudentProgress.ViewModels {
 
 
 
-        private readonly List<Student> studentList = new() {
+        private readonly ObservableCollection<Student> studentList = new() {
             new Student("А А А", new int[] {2, 0, 1, 1}),
             new Student("В В В", new int[] {1, 2, 0, 2}),
             new Student("И И И", new int[] {1, 2, 0, 2})
         };
-        public Student[] StudentList {
-            get => studentList.ToArray();
-            set {
-                List<Student> lol = new();
-                this.RaiseAndSetIfChanged(ref lol, studentList);
-                // Заставляю силой обновить список после каждого добавления/удаления студента...
-                // Даже force.UpdProperty("studentList") не помог, только через RaiseAndSetIfChanged :///
-            }
-        }
+        public ObservableCollection<Student> StudentList { get => studentList; }
+        // Работает!!! А я на прямую пытался засунуть studentList и fail ;'-}
+        // Перед этим у меня ToArray был, что давал Student[] и опять НЕ правильно! fail XD
+        // Триллионный раз убираю using System.Linq; Т.к. ToArray больше не нужен.
         private void Upd_stud_list() {
-            //force.UpdProperty("studentList");
-            StudentList = Array.Empty<Student>();
             Cb_calc();
             GlobalUpdate();
         }
@@ -192,41 +183,11 @@ namespace MonitoringOfStudentProgress.ViewModels {
         }
 
 
-
-        public static byte[] Compress(byte[] input) {
-            using var result = new MemoryStream();
-            var lengthBytes = BitConverter.GetBytes(input.Length);
-            result.Write(lengthBytes, 0, 4);
-            using (var compressionStream = new GZipStream(result, CompressionMode.Compress)) {
-                compressionStream.Write(input, 0, input.Length);
-                compressionStream.Flush();
-            }
-            return result.ToArray();
-        }
-        public static byte[] Decompress(byte[] input) {
-            using var source = new MemoryStream(input);
-            byte[] lengthBytes = new byte[4];
-            source.Read(lengthBytes, 0, 4);
-            var length = BitConverter.ToInt32(lengthBytes, 0);
-            using var decompressionStream = new GZipStream(source, CompressionMode.Decompress);
-            var result = new byte[length];
-            decompressionStream.Read(result, 0, length);
-            return result;
-        }
+        
         String base_path = "../../../../MainStudBase.asd"; // Папка с решением lab2.
-        public void Set_debug_mode() {
-            base_path = "../../../../TestStudBase.asd";
-        }
+        public void Set_test_mode() => base_path = "../../../../TestStudBase.asd";
         private void FuncExport() {
-            StringBuilder sb = new();
-            bool first = true;
-            foreach (Student student in studentList) {
-                if (first) first = false;
-                else sb.Append('\n');
-                sb.Append(student.Pack());
-            }
-            byte[] encoded = Encoding.UTF8.GetBytes(sb.ToString());
-            byte[] compressed = Compress(encoded);
+            byte[] compressed = Gzip.PackAllStudents(studentList);
             File.WriteAllBytes(base_path, compressed);
             Status = "База удачно сохранена";
         }
@@ -236,26 +197,14 @@ namespace MonitoringOfStudentProgress.ViewModels {
                 return;
             }
             byte[] compressed = File.ReadAllBytes(base_path);
-            byte[] decompressed = Decompress(compressed);
-            String data = Encoding.UTF8.GetString(decompressed);
-
-            studentList.Clear();
-            foreach (String pack in data.Split("\n")) studentList.Add(new Student(pack));
+            Gzip.UnpackAllStudents(studentList, compressed);
             Upd_stud_list();
             Status = "База удачно загружена";
         }
 
 
-        public MainWindowViewModel(MainWindow _mw) {
-            // mw = _mw;
-            // studentName = mw.Find<TextBox>("studentName");
-            // cb_1 = mw.Find<ComboBox>("cb_1");
-            // cb_2 = mw.Find<ComboBox>("cb_2");
-            // cb_3 = mw.Find<ComboBox>("cb_3");
-            // cb_4 = mw.Find<ComboBox>("cb_4");
-            // studentList = mw.Find<ListBox>("studentList");
-            // cbAvg = (TextBlock) mw.Find<TextBlock>("cbAvg");
 
+        public MainWindowViewModel() {
             inst = this;
             GlobalUpdate();
 

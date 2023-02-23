@@ -53,7 +53,7 @@ namespace UITestsForMonitoringOfStudentProgress {
             stud_list = list_boxes.First(b => b.Name == "studentList");
 
             MainWindowViewModel? MWVM = mainWindow.DataContext as MainWindowViewModel;
-            if (MWVM != null) MWVM.Set_debug_mode();
+            if (MWVM != null) MWVM.Set_test_mode();
         }
         private void Press_AS() => button_AS.Command.Execute(button_AS.CommandParameter);
         private void Press_GS() => button_GS.Command.Execute(button_GS.CommandParameter);
