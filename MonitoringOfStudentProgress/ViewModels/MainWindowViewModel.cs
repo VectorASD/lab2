@@ -111,7 +111,6 @@ namespace MonitoringOfStudentProgress.ViewModels {
             int a = 0, b = 0, c = 0, d = 0, L = studentList.Count;
             if (L == 0) {
                 GlobA = GlobB = GlobC = GlobD = GlobAVG = "NaN";
-                ColorA = ColorB = ColorC = ColorD = ColorAVG = "Aqua";
                 return;
             }
             foreach (Student student in studentList) {
@@ -131,22 +130,7 @@ namespace MonitoringOfStudentProgress.ViewModels {
             GlobC = String.Format("{0:F3}", c_val);
             GlobD = String.Format("{0:F3}", d_val);
             GlobAVG = String.Format("{0:F4}", avg_val);
-
-            ColorA = a_val < 1 ? "Red" : a_val < 1.5 ? "Yellow" : "Green";
-            ColorB = b_val < 1 ? "Red" : b_val < 1.5 ? "Yellow" : "Green";
-            ColorC = c_val < 1 ? "Red" : c_val < 1.5 ? "Yellow" : "Green";
-            ColorD = d_val < 1 ? "Red" : d_val < 1.5 ? "Yellow" : "Green";
-            ColorAVG = avg_val < 1 ? "Red" : avg_val < 1.5 ? "Yellow" : "Green";
         }
-
-
-
-        private string color_1 = "", color_2 = "", color_3 = "", color_4 = "", color_avg = "";
-        public string ColorA { get => color_1; set => this.RaiseAndSetIfChanged(ref color_1, value); }
-        public string ColorB { get => color_2; set => this.RaiseAndSetIfChanged(ref color_2, value); }
-        public string ColorC { get => color_3; set => this.RaiseAndSetIfChanged(ref color_3, value); }
-        public string ColorD { get => color_4; set => this.RaiseAndSetIfChanged(ref color_4, value); }
-        public string ColorAVG { get => color_avg; set => this.RaiseAndSetIfChanged(ref color_avg, value); }
 
 
 

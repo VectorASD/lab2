@@ -16,17 +16,10 @@ namespace MonitoringOfStudentProgress.Models {
             Update();
         }
         private void Update() {
-            ColorA = scores[0] < 1 ? "Red" : scores[0] < 1.5 ? "Yellow" : "Green";
-            ColorB = scores[1] < 1 ? "Red" : scores[1] < 1.5 ? "Yellow" : "Green";
-            ColorC = scores[2] < 1 ? "Red" : scores[2] < 1.5 ? "Yellow" : "Green";
-            ColorD = scores[3] < 1 ? "Red" : scores[3] < 1.5 ? "Yellow" : "Green";
-
             int S = 0;
             foreach (int i in scores) S += i;
             float avg = (float) S / 4;
             Avg = String.Format("{0:F2}", avg);
-
-            ColorAVG = avg < 1 ? "Red" : avg < 1.5 ? "Yellow" : "Green";
 
             var main = MainWindowViewModel.inst;
             if (main != null) main.GlobalUpdate();
@@ -50,17 +43,8 @@ namespace MonitoringOfStudentProgress.Models {
 
 
 
-        private string colorA = "", colorB = "", colorC = "", colorD = "";
-        public string ColorA { get => colorA; set => SetProperty(ref colorA, value); }
-        public string ColorB { get => colorB; set => SetProperty(ref colorB, value); }
-        public string ColorC { get => colorC; set => SetProperty(ref colorC, value); }
-        public string ColorD { get => colorD; set => SetProperty(ref colorD, value); }
-
-
-
-        private string avg = "", colorAVG = "";
+        private string avg = "";
         public string Avg { get => avg; private set => SetProperty(ref avg, value); }
-        public string ColorAVG { get => colorAVG; set => SetProperty(ref colorAVG, value); }
 
 
 
