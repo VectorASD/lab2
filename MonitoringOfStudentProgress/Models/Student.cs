@@ -36,10 +36,10 @@ namespace MonitoringOfStudentProgress.Models {
 
 
         private readonly int[] scores;
-        public int ScoreA { get => scores[0]; set { scores[0] = value; Update(); } }
-        public int ScoreB { get => scores[1]; set { scores[1] = value; Update(); } }
-        public int ScoreC { get => scores[2]; set { scores[2] = value; Update(); } }
-        public int ScoreD { get => scores[3]; set { scores[3] = value; Update(); } }
+        public int ScoreA { get => scores[0]; set { SetProperty(ref scores[0], value); Update(); } }
+        public int ScoreB { get => scores[1]; set { SetProperty(ref scores[1], value); Update(); } }
+        public int ScoreC { get => scores[2]; set { SetProperty(ref scores[2], value); Update(); } }
+        public int ScoreD { get => scores[3]; set { SetProperty(ref scores[3], value); Update(); } }
 
 
 
